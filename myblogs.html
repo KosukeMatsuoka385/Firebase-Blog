@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="ja">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <br>
 <div>
   <h3>My Blogs</h3>
   <br>
   <hr>
   <p id="user_Name">
-    <!-- User Name -->
+    User Name
   </p>
 </div>
 
@@ -22,20 +24,21 @@
 </script>
 
 <script>
-// $("#user_Name").html(singleBlog.val().name);
+  // console.dir(singleBlog.val());
 
   var user = firebase.auth().currentUser;
   dbBlogs = firebase
-  .database()
-  .ref()
-  .child("Blogs")
-  .orderByChild("uid")
-  .equalTo(user.uid) ;
+    .database()
+    .ref()
+    .child("Blogs")
+    .orderByChild("uid")
+    .equalTo(user.uid);
   dbBlogs.on("value", function (blogs) {
+
     if (blogs.exists()) {
       var blogsHtml = "";
       blogs.forEach(function (singleBlog) {
-        // console.dir(singleBlog.val());
+    console.dir(singleBlog.val().name);
         counter = counter + 1;
         blogsHtml +=
           "<div>";
@@ -63,13 +66,21 @@
         blogsHtml += singleBlog.val().desc;
         blogsHtml += "</div> <br>";
         blogsHtml += "<div>";
-        blogsHtml += "<button class='btn' onclick=deleteblogRecord('"+ singleBlog.key +"')>Delete this Post</button>";
+        blogsHtml += "<button class='btn' onclick=deleteblogRecord('" + singleBlog.key +
+          "')>Delete this Post</button>";
         blogsHtml += "</div> <br>";
         blogsHtml += "</div>";
       });
+      // console.log(blogsHtml);
+      // console.log(blogs.exists());
+      // console.dir(singleBlog.key);
       $("#blogs").html(blogsHtml);
+      // $("#user_Name").html(singleBlog);
+
     }
   });
+
+
 
   function deleteblogRecord(key) {
     var deleteRef = firebase.database().ref().child("Blogs").child(key);
@@ -77,13 +88,14 @@
 
 
     return deleteRef.remove()
-    .then(function() {
-      console.log("Removed Successfully.");
-    })
-    .catch(function() {
-      console.log("Error Occured.");
-    })
+      .then(function () {
+        console.log("Removed Successfully.");
+      })
+      .catch(function () {
+        console.log("Error Occured.");
+      })
   }
 </script>
 <script src="js/index.js"></script>
+
 </html>

@@ -12,7 +12,7 @@
   <title>ACCOUNT SETTINGS</title>
 </head>
 
-<body>
+<body style="background-color: rgba(0,0,0,0.5);">
   <div class="wrapper">
     <form action="">
       <h3>ACCOUNT SETTINGS</h3>
@@ -21,7 +21,7 @@
         <input id="lastName" class="form_control" type="text" placeholder="Last Name">
       </div>
       <div class="form_wrapper">
-        <select id="country" name="country">
+        <select id="country" class="btn" name="country">
           <option value="" disabled selected>Country</option>
           <option value="USA">USA</option>
           <option value="UK">UK</option>
@@ -30,17 +30,19 @@
           <option value="Korea">Korea</option>
         </select>
       </div>
+      <br>
       <div class="form_wrapper">
         <input id="phone" class="form_control" type="number" placeholder="Phone Number">
       </div>
       <div class="form_wrapper">
-        <select id="gender" name="gender">
+        <select id="gender" class="btn" name="gender">
           <option value="" disabled selected>Gender</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Other">Other</option>
         </select>
       </div>
+      <br>
       <div class="form_wrapper">
         <input id="address" class="form_control" type="text" placeholder="Address">
       </div>
@@ -48,7 +50,7 @@
         <input id="biography" class="form_control" type="text" placeholder="Biography">
       </div>
       <div class="form_group container">
-        <button id="btn_update" type="button">
+        <button id="btn_update" class="btn" type="button">
           Update & Set
         </button>
       </div>
