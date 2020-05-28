@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/reset.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+
+  <title>ACCOUNT SETTINGS</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <form action="">
+      <h3>ACCOUNT SETTINGS</h3>
+      <div class="form_wrapper">
+        <input id="firstName" class="form_control" type="text" placeholder="First Name">
+        <input id="lastName" class="form_control" type="text" placeholder="Last Name">
+      </div>
+      <div class="form_wrapper">
+        <select id="country" name="country">
+          <option value="" disabled selected>Country</option>
+          <option value="USA">USA</option>
+          <option value="UK">UK</option>
+          <option value="Japan">Japan</option>
+          <option value="China">China</option>
+          <option value="Korea">Korea</option>
+        </select>
+      </div>
+      <div class="form_wrapper">
+        <input id="phone" class="form_control" type="number" placeholder="Phone Number">
+      </div>
+      <div class="form_wrapper">
+        <select id="gender" name="gender">
+          <option value="" disabled selected>Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="form_wrapper">
+        <input id="address" class="form_control" type="text" placeholder="Address">
+      </div>
+      <div class="form_wrapper">
+        <input id="biography" class="form_control" type="text" placeholder="Biography">
+      </div>
+      <div class="form_group container">
+        <button id="btn_update" type="button">
+          Update & Set
+        </button>
+      </div>
+    </form>
+  </div>
+  <script src="js/index.js"></script>
+  <script>
+    //https://firebase.google.com/docs/auth/web/manage-users?hl=ja
+    firebase.auth().onAuthStateChanged(function (user) { //サインインのお決まり
+      if (user) {
+        var userID = firebase.auth().currentUser.uid;
+        //https://firebase.google.com/docs/database/web/read-and-write?hl=ja
+        firebase.database().ref('Users/' + userID).once('value').then(function (snapshot) { //データの1回読み取り
+          if (snapshot.val()) {
+            window.location.href = "main.html";
+          }
+        });
+      }
+    })
+  </script>
+</body>
+
+</html>

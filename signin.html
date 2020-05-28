@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase.js"></script>
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <title>LOGIN</title>
+  </head>
+
+  <body style="background-color: rgba(0,0,0,0.5);">
+    <div class="wrapper">
+      <form action="">
+        <h3>LOGIN</h3>
+        <br>
+        <br>
+        <br>
+        <div class="form_wrapper">
+          <input
+            id="email"
+            class="form_control"
+            type="email"
+            placeholder="Email"
+          />
+        </div>
+        <div class="form_wrapper">
+          <input
+            id="password"
+            class="form_control"
+            type="password"
+            placeholder="Password"
+          />
+        </div>
+        <br>
+        <div class="form_group container">
+          <button id="btn_login" class="btn" type="button">
+            Login
+          </button>
+        </div>
+        <br>
+        <div>
+          <span class="forgetPassword">Forgot</span>
+          <a href="forgetPassword.html">user name / password?</a>
+        </div>
+        <br>
+        <div>
+          <span>Not have an accout?</span>
+          <a href="signup.html">Sign Up</a>
+        </div>
+        <br>
+        <div>
+          <a href="toppage.html">Top Page</a>
+        </div>
+      </form>
+    </div>
+    <script src="js/index.js"></script>
+    <script>
+      //https://firebase.google.com/docs/auth/web/manage-users?hl=ja
+      firebase.auth().onAuthStateChanged(function (user) {
+        //サインインのお決まり
+        if (user) {
+          var userID = firebase.auth().currentUser.uid;
+          //https://firebase.google.com/docs/database/web/read-and-write?hl=ja
+          firebase
+            .database()
+            .ref("Users/" + userID)
+            .once("value")
+            .then(function (snapshot) {
+              //データの1回読み取り
+              if (snapshot.val()) {
+                window.location.href = "main.html";
+              } else {
+                window.location.href = "accountsettings.html";
+              }
+            });
+        }
+      });
+    </script>
+  </body>
+</html>

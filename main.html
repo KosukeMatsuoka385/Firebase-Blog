@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase.js"></script>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <title>MAIN</title>
+</head>
+
+<body style="background-color: rgba(0,0,0,0.5);">
+    <section id="bar">
+      <a class="navbar-brand" onclick="jump()">
+        BLOG APP
+      </a>
+
+      <a class="navbar-link" onclick="switchView('home.html')">
+        HOME
+      </a>
+
+      <a class="navbar-link" onclick="switchView('myblogs.html')">
+        MY BLOGS
+      </a>
+
+      <a id="btn_logout" class="dropdown-item" href="#">LOGOUT</a>
+
+    </section>
+
+
+    <div>
+      <div>
+        <ul></ul>
+      </div>
+      <div>
+        <div id="container" class="container">
+        </div>
+      </div>
+    </div>
+    <!-- <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script> -->
+    <script src="js/index.js"></script>
+    <script>
+      function jump() {
+
+        window.location.href = "toppage.html";
+      }
+      //https://firebase.google.com/docs/auth/web/manage-users?hl=ja
+      firebase.auth().onAuthStateChanged(function (user) {
+        //サインインのお決まり
+        if (!user) {
+          window.location.href = "signin.html";
+        } else {}
+      });
+    </script>
+</body>
+
+</html>
